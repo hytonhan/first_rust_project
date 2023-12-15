@@ -1,100 +1,18 @@
-use regex::Regex;
-
 pub fn day01() 
 {
-    // let input = _INPUT;
-    let input = _TEST_INPUT;
+    let input = _INPUT;
+    // let input = _TEST_INPUT;
 
-    let re = Regex::new("[0-9]").unwrap();
-    let re2 = Regex::new("one|two|three|four|five|six|seven|eight|nine|[0-9]/g").unwrap();
-    let lines = input.split("\n");
-
-    let mut sum: i32 = 0;
-    let mut sum2: i32 = 0;
-    for line in lines
-    {
-        println!("line: {}", line);
-        let mut captures = re.find_iter(line);
-        let captures_count = re.find_iter(line).count();
-
-        let first_digit = match captures.next() {
-            Some(x) => x.as_str(),
-            None => ""
-        };
-        let last_digit: &str;
-        if captures_count == 1
-        {
-            //last_digit = first_digit.as_str();
-            last_digit = first_digit;
-        }
-        else
-        {
-            last_digit = match captures.last() {
-                Some(x) => x.as_str(),
-                None => ""
-            }
-        } 
-        let mut foo = first_digit.to_owned();
-        foo.push_str(last_digit);
-        let result = foo.parse::<i32>().unwrap();
-        // println!("\tfirst: {}, last: {}", first_digit, last_digit);
-        // println!("\tresult: {}", result);
-        sum += result;
-
-        let mut captures2 = re2.find_iter(line);
-        let captures_count2 = re2.find_iter(line).count();
-        let first_digit2 = match  captures2.next() {
-            Some(x) => x.as_str(),
-            None => ""
-            
-        };
-        let converted_digit1 = match first_digit2 {
-            "one" => "1",
-            "two" => "2",
-            "three" => "3",
-            "four" => "4",
-            "five" => "5",
-            "six" => "6",
-            "seven" => "7",
-            "eight" => "8",
-            "nine" => "9",
-            _ => first_digit2
-        };
-        let last_digit2: &str;
-        if captures_count2 == 1
-        {
-            //last_digit = first_digit.as_str();
-            last_digit2 = first_digit2;
-        }
-        else
-        {
-            last_digit2 = match captures2.last() {
-                Some(x) => x.as_str(),
-                None => ""
-            }
-        } 
-        let converted_digit2 = match last_digit2 {
-            "one" => "1",
-            "two" => "2",
-            "three" => "3",
-            "four" => "4",
-            "five" => "5",
-            "six" => "6",
-            "seven" => "7",
-            "eight" => "8",
-            "nine" => "9",
-            _ => last_digit2
-        };
-        let mut foo2 = converted_digit1.to_owned();
-        foo2.push_str(converted_digit2);
-        let result2 = foo2.parse::<i32>().unwrap();
-        print!("  . First: {}, last: {}", converted_digit1, converted_digit2);
-        println!(". Result: {}", result2);
-        sum2 += result2;
-    }
+    let sum: u32 = {
+        input.lines()
+             .map(|line| line.chars()
+                             .filter_map(|character| character.to_digit(10))
+                             .collect::<Vec<u32>>())
+             .map(|foo| foo.first().unwrap() * 10 + foo.last().unwrap())
+             .sum()
+    };
 
     println!("Sum: {}", sum);
-    println!("Sum2: {}", sum2);
 }
 
 const _INPUT: &str = "twovgtprdzcjjzkq3ffsbcblnpq
@@ -1101,5 +1019,4 @@ fivetwocrhmvxqkvbeightfive1qzcxvds
 const _TEST_INPUT: &str = "1abc2
 pqr3stu8vwx
 a1b2c3d4e5f
-treb7uchet
-2twone";
+treb7uchet";

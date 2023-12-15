@@ -5,11 +5,10 @@ fn main() {
 
     use std::io;
 
-    let mut input: String=String::new();
     let mut exit: bool = false;
     while exit == false
     {
-        input = String::new();
+        let mut input = String::new();
         println!("Enter day number: ");
         match io::stdin().read_line(&mut input) {
             Ok(_goes_into_input_above) => {},

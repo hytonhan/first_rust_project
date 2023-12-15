@@ -1,4 +1,5 @@
 mod day01;
+mod day02;
 
 fn main() {
     // println!("Hello, world!");
@@ -20,6 +21,7 @@ fn main() {
         let start_time: std::time::Instant = std::time::Instant::now();
         match input.as_str() {
             "1" => day01::day01(),
+            "2" => day02::day02(),
             "-1" => exit = true,
             _ => println!("wtf")
         }

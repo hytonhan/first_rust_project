@@ -12,7 +12,26 @@ pub fn day01()
              .sum()
     };
 
+    let sum2: u32 = {
+        input.lines()
+             .map(|line| line.replace("one", "one1one")
+                                   .replace("two", "two2two")
+                                   .replace("three", "three3three")
+                                   .replace("four", "four4four")
+                                   .replace("five", "five5five")
+                                   .replace("six", "six6six")
+                                   .replace("seven", "seven7seven")
+                                   .replace("eight", "eight8eight")
+                                   .replace("nine", "nine9nine")
+                                   .chars()
+                                   .filter_map(|character| character.to_digit(10))
+                                   .collect::<Vec<u32>>())
+             .map(|foo| foo.first().unwrap() * 10 + foo.last().unwrap())
+             .sum()
+    };
+
     println!("Sum: {}", sum);
+    println!("Sum2: {}", sum2);
 }
 
 const _INPUT: &str = "twovgtprdzcjjzkq3ffsbcblnpq
